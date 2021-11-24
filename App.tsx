@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { LogBox, StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { Routes } from './routes';
+import AppLoading from 'expo-app-loading';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { 
+  Roboto_400Regular,
+  Roboto_400Regular_Italic,
+  Roboto_700Bold, 
+  useFonts, 
+} from '@expo-google-fonts/roboto';
+
+LogBox.ignoreLogs(['AsyncStorage has been extracted from react-native core'])
 
 export default function App() {
+  const [ fontsLoaded ] = useFonts({
+    Roboto_400Regular,
+    Roboto_700Bold,
+    Roboto_400Regular_Italic
+  });
+
+  if( !fontsLoaded ) {
+    return <AppLoading />
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+    <NavigationContainer>
+      <StatusBar
+        translucent={true}
+        barStyle='light-content'
+      />
+      <Routes />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
