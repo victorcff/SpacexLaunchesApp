@@ -83,5 +83,5 @@ export async function fetchLaunches() {
     largeImg: patches.large,
   }
   
-  console.log(launches)
+  console.log(launchesData)
 }

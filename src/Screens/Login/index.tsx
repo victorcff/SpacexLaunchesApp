@@ -12,45 +12,45 @@ import { RegisterButton } from '../../Components/RegisterButton';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { loggedIn, loggedOut } from '../../Features/auth/authSlice'
+import { loadingNow, notLoading } from '../../Features/Loading/loadingSlice'
+import { MainStackParamList } from '../../../routes'
+import { dispatch, loading } from '../../Store/actions';
 
-type RootStackParamList = {
-  Home: undefined,
-  Login: undefined, 
-};
+type Props = NativeStackScreenProps<MainStackParamList, 'Login'>;
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
-
-export function Login({navigation}: Props){
+export function Login({ navigation, route }: Props){
   const [ email, setEmail ] = useState('')
   const [ password, setPassowrd ] = useState('')
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        navigation.navigate('Home')
-        console.log('logado')
+      if(user) {
+        dispatch(loggedIn())
+      } else {
+        dispatch(loggedOut())
       }
     })
 
     return unsubscribe;
   }, [])
 
+  // useEffect(() => {
+  //   if(login){
+  //     navigation.navigate('Home')
+  //   }
+  // }, [])
+
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log('Logged in with ', user);
-    })
     .catch(error => alert(error.message))
+    dispatch(loadingNow());
   }
 
   const handleRegister = () => {
     createUserWithEmailAndPassword(auth,email,password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log('Registered with', user);
-    })
     .catch(error => alert(error.message))
+    
   }
 
   return (
@@ -90,7 +90,11 @@ export function Login({navigation}: Props){
         > 
         </LinearGradient>
         <LoginButton
+          title='Login'
+          icon='rocket-launch'
+          isLoading={loading}
           onPress={handleLogin}
+          disabled={loading}
         />
         <RegisterButton
           onPress={handleRegister}

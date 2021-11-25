@@ -2,27 +2,37 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login } from './src/Screens/Login'
 import { Home } from './src/Screens/Home';
+import { View } from 'react-native';
 
-type RootStackParamList = {
+export type MainStackParamList = {
   Home: undefined,
-  Login: undefined, 
-};
+  Login: undefined,
+}
 
-const mainStack = createNativeStackNavigator<RootStackParamList>();
+type RoutesProps = {
+  isLoggedIn: boolean,
+}
 
-export function Routes(){
+const mainStack = createNativeStackNavigator<MainStackParamList>();
+
+export function Routes({isLoggedIn}: RoutesProps ){
   return (
-    <mainStack.Navigator initialRouteName='Login'>
-      <mainStack.Screen 
-        name='Login'
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <mainStack.Screen
-        name='Home'
-        component={Home}
-        options={{ headerShown: false }}
-      />
+    <mainStack.Navigator>
+      {
+        isLoggedIn ?
+          (<mainStack.Screen 
+            name='Home'
+            component={Home}
+            options={{ headerShown: false }}
+          />)
+        :
+          (<mainStack.Screen
+            name='Login'
+            component={Login}
+            options={{ headerShown: false }}
+          />)
+      }
     </mainStack.Navigator>
   );
 }
+
