@@ -5,7 +5,6 @@ import { Routes } from './routes';
 import AppLoading from 'expo-app-loading';
 import { Provider } from 'react-redux'
 import { store } from './src/Store/store'
-import { login } from './src/Store/actions';
 import { 
   Roboto_400Regular,
   Roboto_400Regular_Italic,
@@ -33,9 +32,7 @@ export default function App() {
           translucent={true}
           barStyle='light-content'
         />
-        <Routes 
-          isLoggedIn={login}
-        />
+        <Routes/>
       </NavigationContainer>
     </Provider>
     

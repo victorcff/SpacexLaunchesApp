@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface ILoadingState {
+export interface ILoading {
   isLoading: boolean
 }
 
 const initialState = { 
   isLoading: false,
-} as ILoadingState
+} as ILoading
 
 export const loadingSlice = createSlice({
   name: 'loading',

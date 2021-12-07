@@ -1,12 +1,17 @@
 import React from 'react';
-import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native'
+import { Text, Pressable, PressableProps, ActivityIndicator } from 'react-native'
 import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS } from '../../Themes/colors';
 
-type Props = TouchableOpacityProps
+type Props = PressableProps & {
+  title: string,
+  isLoading: boolean,
+}
 
 export function RegisterButton({
+  title,
+  isLoading,
   ...rest
 }: Props){
   return (
@@ -16,14 +21,19 @@ export function RegisterButton({
       start={{x: 0.25, y: 0.2}}
       end={{x: 0.9, y: 0.9}}
     >
-      <TouchableOpacity
+      <Pressable
         style={styles.button}
         {...rest}
       >
-        <Text style={styles.title}>
-          Registrar
-        </Text>
-      </TouchableOpacity>
+        {
+          isLoading ? <ActivityIndicator color={COLORS.WHITE} /> :
+          <>
+            <Text style={styles.title}>
+              {title}
+            </Text>
+          </>
+        }
+      </Pressable>
     </LinearGradient>
   );
 }

@@ -5,7 +5,7 @@ import {
   TextInput 
 } from 'react-native'
 import { styles } from './styles';
-import {LinearGradient} from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
 import { LoginButton } from '../../Components/LoginButton';
 import { COLORS } from '../../Themes/colors';
 import { RegisterButton } from '../../Components/RegisterButton';
@@ -13,44 +13,70 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { auth } from '../../firebase';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { loggedIn, loggedOut } from '../../Features/auth/authSlice'
-import { loadingNow, notLoading } from '../../Features/Loading/loadingSlice'
+import { loadingLoginNow, notLoadingLogin } from '../../Features/Loading/loadingLoginSlice'
+import { loadingRegisterNow, notLoadingRegister } from '../../Features/Loading/loadingRegisterSlice';
 import { MainStackParamList } from '../../../routes'
-import { dispatch, loading } from '../../Store/actions';
+import { loadingNow, notLoading } from '../../Features/Loading/loadingSlice';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'Login'>;
 
-export function Login({ navigation, route }: Props){
+export function Login({ navigation }: Props){
   const [ email, setEmail ] = useState('')
-  const [ password, setPassowrd ] = useState('')
+  const [ password, setPassword ] = useState('')
+
+  const loadingLogin = useAppSelector(state => state.loadingLogin.isLoadingLogin)
+  const loadingRegister = useAppSelector(state => state.loadingRegister.isLoadingRegister)
+  const loading = useAppSelector(state => state.loading.isLoading)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if(user) {
         dispatch(loggedIn())
+        dispatch(notLoadingLogin())
+        dispatch(notLoadingRegister())
+        dispatch(notLoading())
+        navigation.navigate('Home')
       } else {
         dispatch(loggedOut())
       }
     })
-
     return unsubscribe;
   }, [])
 
   // useEffect(() => {
-  //   if(login){
+  //   if(login) {
   //     navigation.navigate('Home')
   //   }
   // }, [])
 
   const handleLogin = () => {
+    dispatch(loadingNow())
+    dispatch(loadingLoginNow());
     signInWithEmailAndPassword(auth, email, password)
-    .catch(error => alert(error.message))
-    dispatch(loadingNow());
+    .catch(error => {
+      alert(error.message)
+      if(error.message) {
+        dispatch(notLoadingLogin())
+        dispatch(loggedOut())
+        dispatch(notLoading())
+      }
+    })
   }
 
   const handleRegister = () => {
+    dispatch(loadingRegisterNow())
     createUserWithEmailAndPassword(auth,email,password)
-    .catch(error => alert(error.message))
-    
+    .catch(error => {
+      alert(error.message)
+      if(error.message){
+        dispatch(loggedOut())
+        dispatch(notLoadingRegister())
+      } else {
+        handleLogin()
+      }
+    })
   }
 
   return (
@@ -78,7 +104,7 @@ export function Login({ navigation, route }: Props){
           placeholder="Senha"
           placeholderTextColor='#FFFFFF'
           value={password}
-          onChangeText={text => setPassowrd(text)}
+          onChangeText={text => setPassword(text)}
           style={styles.input}
           secureTextEntry
         />
@@ -92,12 +118,15 @@ export function Login({ navigation, route }: Props){
         <LoginButton
           title='Login'
           icon='rocket-launch'
-          isLoading={loading}
+          isLoading={loadingLogin}
           onPress={handleLogin}
           disabled={loading}
         />
         <RegisterButton
+          title='Registrar'
+          isLoading={loadingRegister}
           onPress={handleRegister}
+          disabled={loading}
         />
       </ImageBackground>
     </KeyboardAvoidingView>
