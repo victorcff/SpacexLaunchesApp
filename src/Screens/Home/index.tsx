@@ -10,7 +10,7 @@ import { auth } from '../../firebase';
 import { LogoutButton } from '../../Components/LogoutButton';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { LaunchList } from '../../Components/LaunchList';
-import { SearchBar } from '../../Components/SearchBar';
+// import { SearchBar } from '../../Components/SearchBar';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { COLORS } from '../../Themes/colors';
 
@@ -61,7 +61,7 @@ export function Home({ navigation }: Props){
             onPress={handleLogout}
           />
         </KeyboardAvoidingView>
-        <SearchBar />
+        {/* <SearchBar /> */}
         <LaunchList />
       </ImageBackground>    
     </SafeAreaView>

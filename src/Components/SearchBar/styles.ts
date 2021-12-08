@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { COLORS } from '../../Themes/colors';
 
 export const styles = StyleSheet.create({
-  container: {
+  searchBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '75%',

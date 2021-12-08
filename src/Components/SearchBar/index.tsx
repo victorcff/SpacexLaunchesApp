@@ -14,7 +14,7 @@ export function SearchBar(){
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.searchBar}>
       <FontAwesome5 
         name='search' 
         size={22} 
