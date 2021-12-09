@@ -4,12 +4,14 @@ import { Login } from './src/Screens/Login'
 import { Home } from './src/Screens/Home';
 import { LaunchDetails } from './src/Screens/LaunchDetails';
 import { LaunchArticle } from './src/Screens/LaunchArticle';
+import { LaunchVideo } from './src/Screens/LaunchVideo';
 
 export type MainStackParamList = {
   Home: undefined,
   Login: undefined,
   LaunchDetails: undefined,
   LaunchArticle: undefined,
+  LaunchVideo: undefined,
 }
 
 
@@ -36,6 +38,11 @@ export function Routes(){
       <mainStack.Screen 
         name='LaunchArticle'
         component={LaunchArticle}
+        options={{ headerShown: false }}
+      />
+      <mainStack.Screen 
+        name='LaunchVideo'
+        component={LaunchVideo}
         options={{ headerShown: false }}
       />
     </mainStack.Navigator>

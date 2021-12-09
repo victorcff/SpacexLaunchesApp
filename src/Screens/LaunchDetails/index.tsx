@@ -31,7 +31,7 @@ export function LaunchDetails({ navigation }: Props){
           source={{ uri: launchImage }}
           style={styles.missionImg}
         >
-          </Image>
+        </Image>
         <Text style={styles.missionName}>
           {launchName}
         </Text>
@@ -45,7 +45,7 @@ export function LaunchDetails({ navigation }: Props){
         <View style={styles.missionInfo}>
           <View style={styles.linksInfo}>
             <TouchableOpacity
-              // onPress={goToYoutube}
+              onPress={() => navigation.navigate('LaunchVideo')}
             >
               <AntDesign 
                 name='youtube'

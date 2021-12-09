@@ -17,8 +17,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
-    marginLeft: 80,
+    marginBottom: 15,
   },
   missionImg: {
     width: 150,

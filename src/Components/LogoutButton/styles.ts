@@ -5,10 +5,12 @@ export const styles = StyleSheet.create({
   gradientBorder: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 15,
     height: 50,
     width: 50,
     borderRadius: 50,
+    position: 'absolute',
+    left: '60%',
+    bottom: 30,
   },
   button: {
     borderRadius: 45,

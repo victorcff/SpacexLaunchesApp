@@ -24,7 +24,7 @@ export const launchPickerSlice = createSlice({
     articleLink: (state, action: PayloadAction<string>) => {
       state.launchArticle = action.payload
     },
-    videoLink: (state, action: PayloadAction<string>) => {
+    videoID: (state, action: PayloadAction<string>) => {
       state.launchVideo = action.payload
     },
     imageLink: (state, action: PayloadAction<string>) => {
@@ -33,6 +33,6 @@ export const launchPickerSlice = createSlice({
   }
 })
 
-export const { whichLaunch, videoLink, articleLink, imageLink } = launchPickerSlice.actions
+export const { whichLaunch, videoID, articleLink, imageLink } = launchPickerSlice.actions
 
 export default launchPickerSlice.reducer

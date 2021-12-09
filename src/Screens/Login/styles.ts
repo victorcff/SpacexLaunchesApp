@@ -24,10 +24,4 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     color: COLORS.WHITE,
   },
-  gradientBorder: {
-    width: '80%',
-    height: 1,
-    marginTop: 0,
-    marginBottom: 30,
-  },
 });

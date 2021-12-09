@@ -4,7 +4,7 @@ import { COLORS } from '../../Themes/colors';
 export const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 110,
+    height: 130,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -13,15 +13,15 @@ export const styles = StyleSheet.create({
   },
   logo: {
     position: 'absolute',
-    marginLeft: 26,
-    height: 50,
-    width: 50,
+    marginLeft: 30,
+    height: 60,
+    width: 60,
   },
   rectangleBorder: {
     width: '50%',
-    height: 50,
+    height: 62,
     position: 'absolute',
-    marginLeft: 86,
+    marginLeft: 100,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -29,8 +29,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.BLACK,
-    height: 40,
-    width: '95%',
+    height: 45,
+    width: '89%',
   },
   launchName: {
     fontFamily: 'Roboto_700Bold',

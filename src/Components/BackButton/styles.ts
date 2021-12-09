@@ -4,8 +4,8 @@ import { COLORS } from '../../Themes/colors';
 export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: '80%',
-    height: 50,
+    width: '40%',
+    height: 40,
     backgroundColor: COLORS.YELLOW,
     alignSelf: 'flex-end',
     borderRadius: 20,

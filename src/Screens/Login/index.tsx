@@ -5,9 +5,7 @@ import {
   TextInput 
 } from 'react-native'
 import { styles } from './styles';
-import { LinearGradient } from 'expo-linear-gradient';
 import { LoginButton } from '../../Components/LoginButton';
-import { COLORS } from '../../Themes/colors';
 import { RegisterButton } from '../../Components/RegisterButton';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
@@ -18,6 +16,7 @@ import { loadingRegisterNow, notLoadingRegister } from '../../Features/Loading/l
 import { MainStackParamList } from '../../../routes'
 import { loadingNow, notLoading } from '../../Features/Loading/loadingSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { InputBottomBorder } from '../../Components/InputBottomBorder';
 
 type Props = NativeStackScreenProps<MainStackParamList, 'Login'>;
 
@@ -44,12 +43,6 @@ export function Login({ navigation }: Props){
     })
     return unsubscribe;
   }, [])
-
-  // useEffect(() => {
-  //   if(login) {
-  //     navigation.navigate('Home')
-  //   }
-  // }, [])
 
   const handleLogin = () => {
     dispatch(loadingNow())
@@ -93,13 +86,7 @@ export function Login({ navigation }: Props){
           style={styles.input}
           keyboardType='email-address'
         />
-        <LinearGradient 
-          colors={[COLORS.LIGHTYELLOW, COLORS.RED, COLORS.DARKRED]} 
-          style={styles.gradientBorder}
-          start={{x: 0.3, y: 0.3}}
-          end={{x: 0.9, y: 0.9}}
-        > 
-        </LinearGradient>
+        <InputBottomBorder />
         <TextInput
           placeholder="Senha"
           placeholderTextColor='#FFFFFF'
@@ -108,13 +95,7 @@ export function Login({ navigation }: Props){
           style={styles.input}
           secureTextEntry
         />
-        <LinearGradient 
-          colors={[COLORS.LIGHTYELLOW, COLORS.RED, COLORS.DARKRED]} 
-          style={styles.gradientBorder}
-          start={{x: 0.3, y: 0.3}}
-          end={{x: 0.9, y: 0.9}}
-        > 
-        </LinearGradient>
+        <InputBottomBorder />
         <LoginButton
           title='Login'
           icon='rocket-launch'
